@@ -1,0 +1,20 @@
+# rules.yml
+groups:
+  - name: SpringBootAlerts
+    rules:
+      - alert: HighServerErrorRate
+        expr: |
+          sum(rate(http_server_requests_seconds_count{status=~"5.."}[1m]))
+          /
+          sum(rate(http_server_requests_seconds_count[1m])) > 0.05
+        for: 0s
+        labels:
+          severity: critical
+          application: "⚠️ Alert Manager!!!"
+        annotations:
+          header: "Internal Server Error Happened!!!"
+          exception: "A 5xx error occurred on instance {{ $labels.application }}. Check the logs for details."
+
+
+
+

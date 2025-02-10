@@ -1,0 +1,17 @@
+server:
+  port: 9092
+
+spring:
+  application:
+    name: slack-alert-manager
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    prometheus:
+      access: unrestricted #default
+slack:
+  webhook:
+    url: "https://hooks.slack.com/services/..." # add here you slack webhook url
